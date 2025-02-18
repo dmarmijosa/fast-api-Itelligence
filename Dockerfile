@@ -6,7 +6,7 @@ RUN apt update && apt install -y curl && \
     curl -fsSL https://ollama.ai/install.sh | sh
 
 # Descargar el modelo necesario
-RUN ollama pull deepseek-r1:8b
+RUN ollama pull deepseek-r1:7b
 
 # Crear y establecer el directorio de trabajo
 WORKDIR /app

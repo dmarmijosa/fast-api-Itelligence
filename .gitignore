@@ -1,0 +1,25 @@
+# Archivos de configuración del entorno
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Configuración de logs
+logs/
+*.log
+
+# Archivos de dependencias de Python
+pip-log.txt
+pip-delete-this-directory.txt
+# Configuración de Railway local (en caso de que tengas variables locales)
+railway.json
+
+# Archivos de Docker que pueden generarse automáticamente
+docker-compose.override.yml
+docker-compose.yml
+.dockerignore
+
+.git

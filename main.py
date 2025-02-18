@@ -1,4 +1,5 @@
 import json
+import time
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
@@ -8,6 +9,20 @@ app = FastAPI()
 
 OLLAMA_API_URL = "http://localhost:11434/api/generate"
 
+def wait_for_ollama():
+    for _ in range(10):  # Intentar por 10 intentos (aprox. 10s)
+        try:
+            response = requests.get("http://localhost:11434/api/tags")
+            if response.status_code == 200:
+                print("✅ Ollama está disponible")
+                return True
+        except requests.ConnectionError:
+            print("⏳ Esperando a Ollama...")
+            time.sleep(1)
+    return False
+
+if not wait_for_ollama():
+    raise Exception("❌ Ollama no se pudo conectar después de múltiples intentos.")
 class QueryModel(BaseModel):
     query: str
 

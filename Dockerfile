@@ -5,11 +5,11 @@ FROM python:3.10
 RUN apt update && apt install -y curl && \
     curl -fsSL https://ollama.ai/install.sh | sh
 
-# Descargar el modelo necesario
-RUN ollama pull deepseek-r1:7b
-
 # Crear y establecer el directorio de trabajo
 WORKDIR /app
+
+# Iniciar Ollama en segundo plano y luego descargar el modelo
+RUN ollama serve & sleep 5 && ollama pull deepseek-r1:7b
 
 # Copiar archivos al contenedor
 COPY . .
